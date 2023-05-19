@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +16,15 @@ public class MapsServiceImp implements MapsService{
     private MapsRepo mapsRepo;
     @Override
     public Maps addMaps(Maps maps) {
+        maps.setDate_creation(LocalDateTime.now());
+        //maps.setDateDernièreModification(LocalDateTime.now());
         return mapsRepo.save(maps);
     }
 
+
     @Override
     public Maps getMaps(Integer id) {
+
         return mapsRepo.findById(id).get();
     }
 

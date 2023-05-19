@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("Maps")
 @CrossOrigin("*")
 
 public class MapsController {
@@ -16,10 +17,12 @@ public class MapsController {
     MapsService mapsService;
     @PostMapping("/add")
     public Maps add (@RequestBody Maps maps){
+
         return mapsService.addMaps(maps);
     }
     @GetMapping("/maps")
     public List<Maps> findAllMaps(){
+
         return mapsService.getAllMaps();
     }
 
