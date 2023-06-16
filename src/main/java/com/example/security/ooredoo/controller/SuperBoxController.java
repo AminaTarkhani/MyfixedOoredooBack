@@ -51,7 +51,6 @@ public class SuperBoxController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
     @GetMapping("/signature/{id}")
     public ResponseEntity<byte[]> getSignatureImage(@PathVariable Integer id) {
         try {

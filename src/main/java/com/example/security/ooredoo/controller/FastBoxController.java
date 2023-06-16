@@ -1,7 +1,7 @@
 package com.example.security.ooredoo.controller;
 
 import com.example.security.ooredoo.entities.FastBox;
-import com.example.security.ooredoo.entities.SuperBox;
+import com.example.security.ooredoo.entities.Raccordement;
 import com.example.security.ooredoo.repositories.FastBoxRepo;
 import com.example.security.ooredoo.services.FastBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("FastBox")
@@ -28,23 +29,16 @@ public class FastBoxController {
         this.fastBoxService = fastBoxService;
         this.fastBox = new FastBox(); // Initialisation de l'instance partagée
     }
+
+
     @GetMapping("/verify/{numeroTT}")
    public boolean verifyClient(@PathVariable String numeroTT) {
         return fastBoxRepo.existsByNumeroTT(numeroTT);
     }
     @PostMapping("/ajouter")
-    public FastBox add(@RequestBody FastBox userFastBox) {
-        fastBox.setId(userFastBox.getId());
-        fastBox.setClientPossedeNumero(userFastBox.isClientPossedeNumero());
-        fastBox.setPrix(userFastBox.getPrix());
-        fastBox.setAbonnement(userFastBox.getAbonnement());
-        fastBox.setCategorie(userFastBox.getCategorie());
-        fastBox.setNumeroTT(userFastBox.getNumeroTT());
-        fastBox.setDebit(userFastBox.getDebit());
-        fastBox.setNumeroserie(userFastBox.getNumeroserie());
-        fastBox.setMsisdn(userFastBox.getMsisdn());
-        fastBox.setSignatureImage(userFastBox.getSignatureImage());
-        return fastBoxService.ajouter(fastBox);
+    public FastBox add (@RequestBody FastBox fastBox){
+
+        return fastBoxService.add(fastBox);
     }
     @PostMapping("/add")
     public ResponseEntity<FastBox> add(@RequestBody Map<String, Object> requestData) {
@@ -54,7 +48,6 @@ public class FastBoxController {
             byte[] imageBytes = Base64.getDecoder().decode(base64Image);
             FastBox fastBox = new FastBox();
             fastBox.setSignatureImage(imageBytes);
-            // Copiez d'autres propriétés de requestData vers superBox
             FastBox addedFastBox = fastBoxService.ajouter(fastBox);
             return ResponseEntity.ok().body(addedFastBox);
         } catch (Exception e) {
@@ -77,6 +70,9 @@ public class FastBoxController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
+
 
 
 

@@ -17,4 +17,6 @@ public interface FastBoxService {
     FastBox getById(Integer id);
     public void delete(Integer id);
     FastBox save(FastBox fastBox);
+
+
 }

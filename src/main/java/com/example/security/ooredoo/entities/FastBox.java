@@ -26,6 +26,17 @@ public class FastBox {
     private String msisdn;
     private String numeroTT;
 
+    @Column(name = "contrat_image", columnDefinition = "LONGBLOB")
+    private byte[] contratImage;
+
+    @Column(name = "preuve_image", columnDefinition = "LONGBLOB")
+    private byte[] preuveImage;
+
+    @Column(name = "demande_image", columnDefinition = "LONGBLOB")
+    private byte[] demandeImage;
+
+
+
     @JsonProperty("clientPossedeNumero")
     @JsonDeserialize(using = CustomBooleanDeserializer.class)
     private boolean clientPossedeNumero;

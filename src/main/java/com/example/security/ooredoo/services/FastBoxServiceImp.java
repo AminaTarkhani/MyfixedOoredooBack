@@ -1,11 +1,9 @@
 package com.example.security.ooredoo.services;
 
 import com.example.security.ooredoo.entities.FastBox;
-import com.example.security.ooredoo.entities.SuperBox;
 import com.example.security.ooredoo.repositories.FastBoxRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 
 import java.util.List;
@@ -18,6 +16,7 @@ public class FastBoxServiceImp implements FastBoxService{
 
     @Override
     public FastBox ajouter(FastBox fastBox) {
+
         return fastBoxRepo.save(fastBox);
     }
 
