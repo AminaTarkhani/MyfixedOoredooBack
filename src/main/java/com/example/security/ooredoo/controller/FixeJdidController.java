@@ -112,10 +112,9 @@ public class FixeJdidController {
     @GetMapping("/search")
     public List<FixeJdid> search(@RequestParam("msisdn") String msisdn) {
         if (msisdn.isEmpty()) {
-
             return Collections.emptyList();         }
 
-        String prefix = msisdn.substring(0, 4);
+        String prefix = msisdn.substring(0, 1);
 
         List<FixeJdid> resultList = fixeJdidService.findByMsisdnStartingWith(prefix);
 

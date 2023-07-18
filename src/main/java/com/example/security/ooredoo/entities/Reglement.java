@@ -19,10 +19,20 @@ public class Reglement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String paiement;
-    private double  montant;
-    private  double CIN;
-    private double code;
-    private Date naissance;
-    private double rib;
+    private Double montant;
+    private String rib;
+    private String numeroCheque;
+    private String codeBanque;
+    private String codeAgence;
+    private Date dateEcheance;
+    private String typeIdentite;
+    private String numeroIdentite;
+    private String code;
 
+   private String numerocarte;
+    private String expirationMonth;
+    private String expirationYear;
+    private String nomdetenteur;
+    private String ccv;
+    private String email;
 }

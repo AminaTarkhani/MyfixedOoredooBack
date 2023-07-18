@@ -1,5 +1,6 @@
 package com.example.security.ooredoo.controller;
 
+import com.example.security.ooredoo.entities.FixeJdid;
 import com.example.security.ooredoo.entities.SuperBox;
 import com.example.security.ooredoo.services.SuperBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,8 @@ public class SuperBoxController {
     private SuperBox superBox;
     public SuperBoxController(SuperBoxService superBoxService) {
         this.superBoxService = superBoxService;
-        this.superBox = new SuperBox(); // Créer une instance de SuperBox
+        this.superBox = new SuperBox();
     }
-
     @PostMapping("/ajouter")
     public SuperBox add(@RequestBody SuperBox userSuperBox) {
         superBox.setId(userSuperBox.getId());
@@ -34,6 +34,7 @@ public class SuperBoxController {
         superBox.setMsisdn(userSuperBox.getMsisdn());
         superBox.setNumeroserie(userSuperBox.getNumeroserie());
         superBox.setZonerecherche(userSuperBox.getZonerecherche());
+        superBox.setSignatureImage(userSuperBox.getSignatureImage());
         return superBoxService.ajouter(superBox);
     }
 
@@ -45,8 +46,8 @@ public class SuperBoxController {
             byte[] imageBytes = Base64.getDecoder().decode(base64Image);
             superBox.setSignatureImage(imageBytes);
             // Copiez d'autres propriétés de requestData vers superBox
-            SuperBox addedSuperBox = superBoxService.ajouter(superBox);
-            return ResponseEntity.ok().body(addedSuperBox);
+            SuperBox addSuperBox= superBoxService.addSuperBox(superBox);
+            return ResponseEntity.ok().body(addSuperBox);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
@@ -54,8 +55,8 @@ public class SuperBoxController {
     @GetMapping("/signature/{id}")
     public ResponseEntity<byte[]> getSignatureImage(@PathVariable Integer id) {
         try {
-            SuperBox superBox = superBoxService.getById(id);
-            byte[] signatureImage = superBox.getSignatureImage();
+            SuperBox superbox = superBoxService.getById(id);
+            byte[] signatureImage = superbox.getSignatureImage();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
@@ -66,7 +67,6 @@ public class SuperBoxController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @GetMapping("/list")
     public List<SuperBox> finAllActivation(){
 
