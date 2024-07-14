@@ -1,4 +1,5 @@
 package com.example.security.ooredoo.controller;
+import com.example.security.ooredoo.entities.FastBox;
 import com.example.security.ooredoo.entities.FlashBox;
 import com.example.security.ooredoo.services.FlashBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,51 +20,14 @@ public class FlashBoxController {
 
     @PostMapping("/add")
     public FlashBox add(@RequestBody FlashBox flashBox) {
-        // Vérifiez si "Level 4" est sélectionné et mettez à jour la propriété isChecked en conséquence
         if ("Level 4".equals(flashBox.getIsChecked())) {
             flashBox.setIsChecked(null);
         } else {
             flashBox.setIsChecked("Level 4");
         }
 
-        // Enregistrez l'objet FlashBox dans la base de données
         return flashBoxService.add(flashBox);
     }
-
-    @PostMapping("/uploadImages")
-    public void uploadImages(@RequestBody FlashBox flashBox,
-                             @RequestParam("preuvesImage") MultipartFile preuvesImage,
-                             @RequestParam("contratImage") MultipartFile contratImage,
-                             @RequestParam("justificatifImage") MultipartFile justificatifImage,
-                             @RequestParam("conditionsImage") MultipartFile conditionsImage) {
-        try {
-            // Check if the image files are not empty
-            if (!preuvesImage.isEmpty()) {
-                flashBox.setPreuves(preuvesImage.getBytes());
-            }
-            if (!contratImage.isEmpty()) {
-                flashBox.setContrat(contratImage.getBytes());
-            }
-            if (!justificatifImage.isEmpty()) {
-                flashBox.setJustificatif(justificatifImage.getBytes());
-            }
-            if (!conditionsImage.isEmpty()) {
-                flashBox.setConditions(conditionsImage.getBytes());
-            }
-
-            // Save the FlashBox entity to the database
-            flashBoxService.add(flashBox);
-
-            // Display a success message
-            System.out.println("Images saved successfully!");
-        } catch (IOException e) {
-            // Handle errors during image saving
-            System.out.println("An error occurred while saving the images: " + e.getMessage());
-        }
-    }
-
-
-
 
 
     @GetMapping("/search")
@@ -82,6 +46,11 @@ public class FlashBoxController {
     public List<String> getAvailableMsisdns() {
         List<String> availableMsisdns = flashBoxService.getAvailableMsisdns();
         return availableMsisdns;
+    }
+    @GetMapping("/list")
+    public List<FlashBox> finAllFlashBox(){
+
+        return flashBoxService.getAllList();
     }
 
 }

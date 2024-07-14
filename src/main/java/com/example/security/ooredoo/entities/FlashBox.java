@@ -33,20 +33,10 @@ public class FlashBox {
     private String offres;
     private String msisdn;
     private String debit;
+    private String city;
     private String  isChecked;
 
-    @Column(name = "sn", columnDefinition = "LONGBLOB")
-    private byte[] sn;
-    @Column(name = "ont", columnDefinition = "LONGBLOB")
-    private byte[] ont;
-    @Column(name = "preuves", columnDefinition = "LONGBLOB")
-    private byte[] preuves;
-    @Column(name = "contrat", columnDefinition = "LONGBLOB")
-    private byte[] contrat;
-    @Column(name = "justificatif", columnDefinition = "LONGBLOB")
-    private byte[] justificatif;
-    @Column(name = "conditions", columnDefinition = "LONGBLOB")
-    private byte[] conditions;
+
     private String gouvernoratInstallation;
     private String localiteInstallation;
     private Long codepostalInstallation;

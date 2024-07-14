@@ -1,5 +1,6 @@
 package com.example.security.ooredoo.services;
 
+import com.example.security.ooredoo.entities.FastBox;
 import com.example.security.ooredoo.entities.FixeJdid;
 import com.example.security.ooredoo.entities.FlashBox;
 import com.example.security.ooredoo.repositories.FlashBoxRepo;
@@ -44,5 +45,9 @@ public class FlashBoxServiceImpl implements FlashBoxService{
     private boolean isMsisdnAvailable(String msisdn) {
         return msisdn != null && !msisdn.isEmpty();
 
+    }
+    @Override
+    public List<FlashBox> getAllList() {
+        return flashBoxRepo.findAll();
     }
 }

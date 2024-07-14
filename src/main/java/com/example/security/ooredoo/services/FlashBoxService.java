@@ -1,5 +1,6 @@
 package com.example.security.ooredoo.services;
 
+import com.example.security.ooredoo.entities.FastBox;
 import com.example.security.ooredoo.entities.FixeJdid;
 import com.example.security.ooredoo.entities.FlashBox;
 
@@ -10,7 +11,7 @@ public interface FlashBoxService {
     FlashBox findByMsisdn(String msisdn);
 
     List<FlashBox> findByMsisdnStartingWith(String prefix);
-
-
     List<String> getAvailableMsisdns();
+    public List<FlashBox> getAllList();
+
 }

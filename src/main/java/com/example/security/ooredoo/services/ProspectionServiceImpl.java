@@ -39,6 +39,7 @@ public class ProspectionServiceImpl implements IProspectionService {
 
     @Override
     public void deleteProspection(long id) {
+
         pRepo.deleteById(id);
     }
 
